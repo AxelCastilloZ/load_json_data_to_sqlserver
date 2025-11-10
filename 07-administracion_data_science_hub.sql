@@ -40,8 +40,8 @@ PRINT '';
 SELECT 
     name AS FileName,
     CASE type
-        WHEN 0 THEN 'DATA'    -- Archivo de datos (.mdf o .ndf)
-        WHEN 1 THEN 'LOG'     -- Archivo de log (.ldf)
+        WHEN 0 THEN 'DATA'   
+        WHEN 1 THEN 'LOG'    
         ELSE 'UNKNOWN'
     END AS FileType,
     CAST(size * 8.0 / 1024 AS DECIMAL(10,2)) AS SizeMB,
@@ -50,7 +50,7 @@ FROM sys.database_files
 ORDER BY type, name;
 
 PRINT '';
-PRINT '✓ Información de archivos mostrada.';
+PRINT ' Información de archivos mostrada.';
 PRINT '';
 GO
 
@@ -76,7 +76,7 @@ GROUP BY fg.name
 ORDER BY fg.name;
 
 PRINT '';
-PRINT '✓ Resumen por filegroup mostrado.';
+PRINT ' Resumen por filegroup mostrado.';
 PRINT '';
 GO
 
@@ -110,7 +110,7 @@ WHERE type = 0  -- Solo archivos de datos (no log)
 ORDER BY name;
 
 PRINT '';
-PRINT '✓ Análisis de uso de espacio completado.';
+PRINT ' Análisis de uso de espacio completado.';
 PRINT '';
 GO
 
@@ -143,7 +143,7 @@ GROUP BY t.name, fg.name, p.rows
 ORDER BY TotalSpaceMB DESC;
 
 PRINT '';
-PRINT '✓ Análisis de espacio por tabla completado.';
+PRINT ' Análisis de espacio por tabla completado.';
 PRINT '';
 GO
 
@@ -179,7 +179,7 @@ FROM sys.database_files
 ORDER BY type, name;
 
 PRINT '';
-PRINT '✓ Configuración de crecimiento mostrada.';
+PRINT ' Configuración de crecimiento mostrada.';
 PRINT '';
 GO
 

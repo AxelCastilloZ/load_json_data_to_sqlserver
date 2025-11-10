@@ -10,8 +10,7 @@
 -- Descripción:
 -- Creación de la tabla principal Article (con los artículos científicos)
 -- y las 4 tablas intermedias que resuelven las relaciones M:N.
--- Estas tablas crecen constantemente y van en DATA_FG filegroup.
--- ============================================
+
 
 USE data_science_hub_db;
 GO
@@ -25,14 +24,14 @@ GO
 -- ============================================
 CREATE TABLE Article
 (
-    id VARCHAR(20) NOT NULL,                          -- ID del artículo (del JSON)
-    title NVARCHAR(500) NOT NULL,                     -- Título del artículo
-    abstract NVARCHAR(MAX) NULL,                      -- Resumen/abstract (puede ser muy largo)
+    id VARCHAR(20) NOT NULL,                        
+    title NVARCHAR(500) NOT NULL,                    
+    abstract NVARCHAR(MAX) NULL,                     
     publication_date DATETIME2 NOT NULL,              -- Fecha de publicación
     
     -- Constraints
     CONSTRAINT PK_Article PRIMARY KEY (id)            -- Clave primaria
-) ON [DATA_FG];  -- Especifica que va en el filegroup DATA_FG
+) ON [DATA_FG];  
 GO
 
 PRINT 'Tabla Article creada exitosamente en DATA_FG.';
@@ -59,16 +58,16 @@ CREATE TABLE Article_Keyword
     keyword_id INT NOT NULL,                          -- FK hacia Keyword
     
     -- Constraints
-    CONSTRAINT PK_Article_Keyword PRIMARY KEY (article_id, keyword_id),  -- PK compuesta
+    CONSTRAINT PK_Article_Keyword PRIMARY KEY (article_id, keyword_id),
     CONSTRAINT FK_Article_Keyword_Article FOREIGN KEY (article_id) 
         REFERENCES Article(id) 
-        ON DELETE CASCADE                             -- Si se elimina el artículo, se eliminan sus keywords
+        ON DELETE CASCADE                            
         ON UPDATE CASCADE,                            -- Si se actualiza el ID del artículo, se actualiza aquí
     CONSTRAINT FK_Article_Keyword_Keyword FOREIGN KEY (keyword_id) 
         REFERENCES Keyword(keyword_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-) ON [DATA_FG];  -- Especifica que va en el filegroup DATA_FG
+) ON [DATA_FG];  
 GO
 
 PRINT 'Tabla Article_Keyword creada exitosamente en DATA_FG.';
@@ -82,11 +81,11 @@ GO
 -- ============================================
 CREATE TABLE Article_Author
 (
-    article_id VARCHAR(20) NOT NULL,                  -- FK hacia Article
-    author_id INT NOT NULL,                           -- FK hacia Author
+    article_id VARCHAR(20) NOT NULL,                
+    author_id INT NOT NULL,                          
     
     -- Constraints
-    CONSTRAINT PK_Article_Author PRIMARY KEY (article_id, author_id),  -- PK compuesta
+    CONSTRAINT PK_Article_Author PRIMARY KEY (article_id, author_id),  
     CONSTRAINT FK_Article_Author_Article FOREIGN KEY (article_id) 
         REFERENCES Article(id)
         ON DELETE CASCADE
@@ -95,7 +94,7 @@ CREATE TABLE Article_Author
         REFERENCES Author(author_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-) ON [DATA_FG];  -- Especifica que va en el filegroup DATA_FG
+) ON [DATA_FG]; 
 GO
 
 PRINT 'Tabla Article_Author creada exitosamente en DATA_FG.';
@@ -109,11 +108,11 @@ GO
 -- ============================================
 CREATE TABLE Article_Venue
 (
-    article_id VARCHAR(20) NOT NULL,                  -- FK hacia Article
-    venue_id INT NOT NULL,                            -- FK hacia Venue
+    article_id VARCHAR(20) NOT NULL,                 
+    venue_id INT NOT NULL,                          
     
     -- Constraints
-    CONSTRAINT PK_Article_Venue PRIMARY KEY (article_id, venue_id),  -- PK compuesta
+    CONSTRAINT PK_Article_Venue PRIMARY KEY (article_id, venue_id), 
     CONSTRAINT FK_Article_Venue_Article FOREIGN KEY (article_id) 
         REFERENCES Article(id)
         ON DELETE CASCADE
@@ -122,7 +121,7 @@ CREATE TABLE Article_Venue
         REFERENCES Venue(venue_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-) ON [DATA_FG];  -- Especifica que va en el filegroup DATA_FG
+) ON [DATA_FG]; 
 GO
 
 PRINT 'Tabla Article_Venue creada exitosamente en DATA_FG.';
@@ -136,11 +135,11 @@ GO
 -- ============================================
 CREATE TABLE Article_Team
 (
-    article_id VARCHAR(20) NOT NULL,                  -- FK hacia Article
-    team_id INT NOT NULL,                             -- FK hacia Team
+    article_id VARCHAR(20) NOT NULL,                  
+    team_id INT NOT NULL,                          
     
     -- Constraints
-    CONSTRAINT PK_Article_Team PRIMARY KEY (article_id, team_id),  -- PK compuesta
+    CONSTRAINT PK_Article_Team PRIMARY KEY (article_id, team_id),  
     CONSTRAINT FK_Article_Team_Article FOREIGN KEY (article_id) 
         REFERENCES Article(id)
         ON DELETE CASCADE
@@ -149,7 +148,7 @@ CREATE TABLE Article_Team
         REFERENCES Team(team_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-) ON [DATA_FG];  -- Especifica que va en el filegroup DATA_FG
+) ON [DATA_FG]; 
 GO
 
 PRINT 'Tabla Article_Team creada exitosamente en DATA_FG.';

@@ -4,7 +4,7 @@
 
 -- ============================================
 -- CONSULTAS SQL - DataScienceHub Database
--- Archivo: Consultas_DataScienceHub.sql
+-- Archivo: Consultas
 -- ============================================
 -- Descripción:
 -- Script con las 4 consultas de análisis requeridas.
@@ -46,7 +46,7 @@ GROUP BY a.id, a.title, a.publication_date
 ORDER BY a.publication_date DESC;
 
 PRINT '';
-PRINT '✓ Consulta 1 ejecutada.';
+PRINT ' Consulta 1 ejecutada.';
 PRINT '';
 GO
 
@@ -72,7 +72,7 @@ GROUP BY k.keyword_id, k.keyword_name
 ORDER BY ArticleCount DESC;
 
 PRINT '';
-PRINT '✓ Consulta 2 ejecutada.';
+PRINT ' Consulta 2 ejecutada.';
 PRINT '';
 GO
 
@@ -100,7 +100,7 @@ WHERE v.venue_name = 'info.info-ai'
 ORDER BY a.publication_date DESC;
 
 PRINT '';
-PRINT '✓ Consulta 3 ejecutada.';
+PRINT ' Consulta 3 ejecutada.';
 PRINT '';
 GO
 
@@ -130,7 +130,7 @@ WHERE a.abstract LIKE '%privacy%'
 ORDER BY a.publication_date DESC;
 
 PRINT '';
-PRINT '✓ Consulta 4 ejecutada.';
+PRINT ' Consulta 4 ejecutada.';
 PRINT '';
 GO
 

@@ -5,7 +5,7 @@
 
 -- ============================================
 -- CARGA DE DATOS - DataScienceHub Database
--- Archivo: CargaDatos_DataScienceHub.sql
+-- Archivo: CargaDatos
 -- ============================================
 -- Descripción:
 -- Importación completa de datos desde articles.json usando OPENROWSET y OPENJSON.
@@ -18,7 +18,7 @@
 USE data_science_hub_db;
 GO
 
-SET NOCOUNT ON;  -- No mostrar contador de filas afectadas (más limpio)
+SET NOCOUNT ON;  
 GO
 
 PRINT '========================================';
@@ -42,12 +42,12 @@ BEGIN TRY
         SINGLE_CLOB
     ) AS JsonFile;
     
-    PRINT '✓ Archivo JSON leído exitosamente.';
+    PRINT ' Archivo JSON leído exitosamente.';
     PRINT '  Tamaño: ' + CAST(LEN(@JSON) AS VARCHAR(20)) + ' caracteres';
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al leer el archivo JSON:';
+    PRINT ' ERROR al leer el archivo JSON:';
     PRINT '  ' + ERROR_MESSAGE();
     PRINT '  Verifica que:';
     PRINT '    - La ruta sea correcta: D:\Development\Proyectos\articles.json';
@@ -79,12 +79,12 @@ BEGIN TRY
       AND LTRIM(RTRIM(keyword_value)) NOT IN (SELECT keyword_name FROM Keyword);
     
     DECLARE @KeywordCount INT = @@ROWCOUNT;
-    PRINT '✓ Tabla Keyword cargada.';
+    PRINT ' Tabla Keyword cargada.';
     PRINT '  Registros insertados: ' + CAST(@KeywordCount AS VARCHAR(10));
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al cargar Keyword:';
+    PRINT ' ERROR al cargar Keyword:';
     PRINT '  ' + ERROR_MESSAGE();
 END CATCH
 GO
@@ -111,12 +111,12 @@ BEGIN TRY
       AND LTRIM(RTRIM(author_value)) NOT IN (SELECT author_name FROM Author);
     
     DECLARE @AuthorCount INT = @@ROWCOUNT;
-    PRINT '✓ Tabla Author cargada.';
+    PRINT ' Tabla Author cargada.';
     PRINT '  Registros insertados: ' + CAST(@AuthorCount AS VARCHAR(10));
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al cargar Author:';
+    PRINT ' ERROR al cargar Author:';
     PRINT '  ' + ERROR_MESSAGE();
 END CATCH
 GO
@@ -143,12 +143,12 @@ BEGIN TRY
       AND LTRIM(RTRIM(venue_value)) NOT IN (SELECT venue_name FROM Venue);
     
     DECLARE @VenueCount INT = @@ROWCOUNT;
-    PRINT '✓ Tabla Venue cargada.';
+    PRINT ' Tabla Venue cargada.';
     PRINT '  Registros insertados: ' + CAST(@VenueCount AS VARCHAR(10));
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al cargar Venue:';
+    PRINT ' ERROR al cargar Venue:';
     PRINT '  ' + ERROR_MESSAGE();
 END CATCH
 GO
@@ -175,12 +175,12 @@ BEGIN TRY
       AND LTRIM(RTRIM(team_value)) NOT IN (SELECT team_name FROM Team);
     
     DECLARE @TeamCount INT = @@ROWCOUNT;
-    PRINT '✓ Tabla Team cargada.';
+    PRINT ' Tabla Team cargada.';
     PRINT '  Registros insertados: ' + CAST(@TeamCount AS VARCHAR(10));
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al cargar Team:';
+    PRINT ' ERROR al cargar Team:';
     PRINT '  ' + ERROR_MESSAGE();
 END CATCH
 GO
@@ -212,12 +212,12 @@ BEGIN TRY
       AND id NOT IN (SELECT id FROM Article);
     
     DECLARE @ArticleCount INT = @@ROWCOUNT;
-    PRINT '✓ Tabla Article cargada.';
+    PRINT ' Tabla Article cargada.';
     PRINT '  Registros insertados: ' + CAST(@ArticleCount AS VARCHAR(10));
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '✗ ERROR al cargar Article:';
+    PRINT ' ERROR al cargar Article:';
     PRINT '  ' + ERROR_MESSAGE();
 END CATCH
 GO
@@ -258,10 +258,10 @@ BEGIN TRY
       );
     
     DECLARE @AKCount INT = @@ROWCOUNT;
-    PRINT '  ✓ Article_Keyword: ' + CAST(@AKCount AS VARCHAR(10)) + ' relaciones insertadas.';
+    PRINT '   Article_Keyword: ' + CAST(@AKCount AS VARCHAR(10)) + ' relaciones insertadas.';
 END TRY
 BEGIN CATCH
-    PRINT '  ✗ ERROR en Article_Keyword: ' + ERROR_MESSAGE();
+    PRINT '   ERROR en Article_Keyword: ' + ERROR_MESSAGE();
 END CATCH
 
 -- ============================================
@@ -291,10 +291,10 @@ BEGIN TRY
       );
     
     DECLARE @AACount INT = @@ROWCOUNT;
-    PRINT '  ✓ Article_Author: ' + CAST(@AACount AS VARCHAR(10)) + ' relaciones insertadas.';
+    PRINT '   Article_Author: ' + CAST(@AACount AS VARCHAR(10)) + ' relaciones insertadas.';
 END TRY
 BEGIN CATCH
-    PRINT '  ✗ ERROR en Article_Author: ' + ERROR_MESSAGE();
+    PRINT '   ERROR en Article_Author: ' + ERROR_MESSAGE();
 END CATCH
 
 -- ============================================
@@ -324,10 +324,10 @@ BEGIN TRY
       );
     
     DECLARE @AVCount INT = @@ROWCOUNT;
-    PRINT '  ✓ Article_Venue: ' + CAST(@AVCount AS VARCHAR(10)) + ' relaciones insertadas.';
+    PRINT '   Article_Venue: ' + CAST(@AVCount AS VARCHAR(10)) + ' relaciones insertadas.';
 END TRY
 BEGIN CATCH
-    PRINT '  ✗ ERROR en Article_Venue: ' + ERROR_MESSAGE();
+    PRINT '   ERROR en Article_Venue: ' + ERROR_MESSAGE();
 END CATCH
 
 -- ============================================
@@ -357,11 +357,11 @@ BEGIN TRY
       );
     
     DECLARE @ATCount INT = @@ROWCOUNT;
-    PRINT '  ✓ Article_Team: ' + CAST(@ATCount AS VARCHAR(10)) + ' relaciones insertadas.';
+    PRINT '   Article_Team: ' + CAST(@ATCount AS VARCHAR(10)) + ' relaciones insertadas.';
     PRINT '';
 END TRY
 BEGIN CATCH
-    PRINT '  ✗ ERROR en Article_Team: ' + ERROR_MESSAGE();
+    PRINT '   ERROR en Article_Team: ' + ERROR_MESSAGE();
 END CATCH
 GO
 
